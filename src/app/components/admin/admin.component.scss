@@ -1,0 +1,38 @@
+.full-width {
+  width: 100%;
+}
+
+.header {
+    margin-top: 1em;
+}
+
+:host ::ng-deep {
+  .mat-radio-label {
+    padding-left: 1em;
+  }
+  
+  .mat-form-field-infix {
+    display: flex;
+    width: 100%;
+  }
+
+  .mat-grid-tile .mat-figure {
+    justify-content: left;
+  }
+}
+
+.tile {
+  padding: 4px;
+}
+
+.tile-left {
+  text-align: left;
+}
+
+.tile-right {
+  text-align: right;
+}
+
+.mat-button.mat-primary .mat-button-focus-overlay {
+  background-color: transparent;
+}

@@ -1,0 +1,157 @@
+.mat-list-item {
+    cursor: pointer;
+}
+
+.mat-list-item-content{
+    padding: 4px;
+    cursor: pointer;
+    align-content: left;
+}
+
+.mat-list-item button {
+    padding: 0;
+    text-align: left;
+    min-width: 20px;
+    margin-right: 8px;
+}
+
+.mat-card {
+    padding: 8px;
+}
+
+.cart-btn {
+    background-color: #fff;
+    margin-bottom: 6px;
+}
+
+:host.mat-horizontal-content-container {
+    padding: 0;
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+
+  .boxfull {
+      background-color: #84c687;
+  }
+
+  .boxnotfull {
+      background-color: white;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  .btn {
+      cursor: pointer;
+  }
+
+  .amt {
+      color: #eb436d;
+  }
+
+  :host ::ng-deep .mat-tab-list {
+    transform: translateX(-400px);
+    transition: transform .15s cubic-bezier(.35,0,.25,1)
+}
+
+:host ::ng-deep .mat-card {
+    border: 1px solid #333;
+}
+
+:host ::ng-deep .mat-tab-label {
+    padding: 0 6px;
+    min-width: 80px;
+}
+
+:host ::ng-deep .mat-radio-label-content {
+    white-space: normal;
+}
+
+.add-contents {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.box-contents {
+    max-height: 329px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#sendform {
+    display: none;
+}
+
+.disclaimer {
+    margin-top: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Roboto,"Helvetica Neue",sans-serif !important;
+    font-weight: 400;
+}
+
+.btn {
+    background: transparent;
+    color: black;
+}
+
+.image-icon {
+    order: 2
+}
+
+.list-content {
+    order: 1;
+    flex: 1;
+}
+
+.box-price {
+    display: block;
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+.list-icons {
+    white-space: nowrap;
+}
+
+@media (min-width: 600px){
+    :host ::ng-deep {
+        .mat-list-base .mat-list-item.mat-list-item-with-avatar {
+            height: 40px;
+        }
+        .card-head {
+        font-size: 18px;
+        }
+        .list-content, .mat-radio-label-content {
+            font-size: 14px;
+        }
+        .mat-list-base .mat-list-item .mat-list-item-content {
+            justify-content: space-between;
+            margin: 6px 0;
+            padding: 0;
+            line-height: 18px;
+        }
+        .mat-button {
+            min-width: 100px;
+            max-height: 38px;
+        }
+    }
+}
+
+.cart-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-loader {
+    margin: auto;
+    width: 50px;
+    max-height: 50px;
+    margin-top: 1em;
+}

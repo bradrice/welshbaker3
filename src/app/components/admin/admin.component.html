@@ -1,0 +1,196 @@
+<div class="container">
+  
+  <div class="row" id="tabs" *ngIf="(afAuth.user | async)">
+    <div class="col-sm-12">
+      <div class="header">
+        <button class="btn btn-primary" (click)="logout()">Logout</button>
+      </div>
+        <mat-tab-group  animationDuration="500ms">
+  <mat-tab label="WelshCakes">
+      <div  class="row" role="listitem" >
+          <div class="col-sm-12">
+            <table class="table" style="width: 100%">
+              <thead>
+                <th>Title</th>  
+                <th>Product Id</th>              
+                <th>Active</th>
+                <th>Product Id</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of welshcakes">
+
+              <td class="tile tile-left">
+                {{item.title}}
+              </td>
+              <td class="tile tile-left">
+                {{item.productId}}
+              </td>
+              <td>{{item.active}}</td>
+              <td class="tile" style="text-align: right;">
+                <button mat-button class="btn btn-primary" (click)="updateItem(item.key, 'welshcakes')">Edit</button>
+              </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <button mat-button (click)="addItem('welshcakes')">Add Item</button>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+            <mat-divider></mat-divider>
+            </div>
+             
+          </div>
+  </mat-tab>
+  <mat-tab label="Scones">
+    <div  class="row" role="listitem" >
+      <div class="col-sm-12">
+        <table class="table" style="width: 100%">
+          <thead>
+            <th>Title</th>                
+            <th>Active</th>
+            <th>Product Id</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of scones">
+          <td class="tile tile-left">
+            {{item.title}}
+          </td>
+          <td class="tile tile-left">
+            {{item.productId}}
+          </td>
+          <td>{{item.active}}</td>
+          <td class="tile">
+            <button mat-button class="btn btn-primary" (click)="updateItem(item.key, 'scones')">Edit</button>
+          </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button mat-button (click)="addItem('scones')">Add Item</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <mat-divider></mat-divider>
+        </div>
+         
+      </div>
+  </mat-tab>
+  <mat-tab label="Shortbread">
+    <div  class="row" role="listitem" >
+      <div class="col-sm-12">
+        <table class="table" style="width: 100%">
+          <thead>
+            <th>Title</th>     
+            <th>Product Id</th>           
+            <th>Active</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of shortbread">
+          <td class="tile tile-left">
+            {{item.title}}
+          </td>
+          <td class="tile tile-left">
+            {{item.productId}}
+          </td>
+          <td>{{item.active}}</td>
+          <td class="tile">
+            <button mat-button class="btn btn-primary" (click)="updateItem(item.key, 'shortbread')">Edit</button>
+          </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button mat-button (click)="addItem('shortbread')">Add Item</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <mat-divider></mat-divider>
+        </div>
+      </div>
+  </mat-tab>
+  <mat-tab label="ChocDip">
+    <div  class="row" role="listitem" >
+      <div class="col-sm-12">
+        <table class="table" style="width: 100%">
+          <thead>
+            <th>Title</th>                
+            <th>Active</th>
+            <th>Product Id</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of chocdipped">
+          <td class="tile tile-left">
+            {{item.title}}
+          </td>
+          <td class="tile tile-left">
+            {{item.productId}}
+          </td>
+          <td>{{item.active}}</td>
+          <td class="tile">
+            <button mat-button class="btn btn-primary" (click)="updateItem(item.key, 'chocDipped')">Edit</button>
+          </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button mat-button (click)="addItem('chocDipped')">Add Item</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <mat-divider></mat-divider>
+        </div>
+         
+      </div>
+    
+  </mat-tab>
+  <mat-tab label="Extras">
+    <div  class="row" role="listitem" >
+      <div class="col-sm-12">
+        <table class="table" style="width: 100%">
+          <thead>
+            <th>Title</th>                
+            <th>Active</th>
+            <th>Product Id</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of extras">
+          <td class="tile tile-left">
+            {{item.title}}
+          </td>
+          <td class="tile tile-left">
+            {{item.productId}}
+          </td>
+          <td>{{item.active}}</td>
+          <td class="tile">
+            <button mat-button class="btn btn-primary" (click)="updateItem(item.key, 'extras')">Edit</button>
+          </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button mat-button (click)="addItem('extras')">Add Item</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <mat-divider></mat-divider>
+        </div>
+         
+      </div>
+      <!-- <mat-list role="list" class="add-contents">
+          <mat-list-item  class="l-item" role="listitem" *ngFor="let item of extras | async">
+              <mat-icon (click)="addExtraToBox(item)" matListIcon>add_circle_outline</mat-icon>
+              <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
+                <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
+          </mat-list-item>
+      </mat-list> -->
+    </mat-tab>
+  </mat-tab-group>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="header">
+            <h1>Login to admin!</h1>
+        </div>
+      <mat-card>
+          <p *ngIf="errMsg" class="warn">{{errMsg}}</p>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <mat-label>Email</mat-label> 
+              <input matInput placeholder="Email" class="form-control full-width" required type="email" formControlName="email2" />
+              <mat-error >You have to provide a valid email</mat-error>
+              <mat-error >This field is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" required class="form-control" type="password" formControlName="password2" />
+              <mat-error >This field is required</mat-error>
+
+          </mat-form-field>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

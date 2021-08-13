@@ -1,0 +1,138 @@
+<div class="progress-loader" [hidden]="!isLoading">
+  <mat-progress-spinner [diameter]="50" [mode]="'indeterminate'">
+  </mat-progress-spinner>
+</div>
+
+<div class="container-fluid" [style.visibility]="isLoading ? 'hidden' : 'visible'">
+  <div class="row">
+    <div class="col-md-3 col-sm-3 col-lg-2">
+      <mat-card>
+          <mat-card-title class="card-head">
+            Pick a box size
+            </mat-card-title>
+            <mat-card-content>
+                <mat-radio-group 
+                aria-labelledby="example-radio-group-label"
+                class="example-radio-group">
+                <mat-radio-button (change)="setBoxSize($event);" [checked]="box.productId === currItem" class="example-radio-button" *ngFor="let box of box_sizes | async" [value]="box">
+                  {{box.title}}
+                </mat-radio-button>
+              </mat-radio-group>
+      </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-md-5 col-sm-5 col-lg-5">
+      <mat-card>
+        <mat-card-title class="card-head">Add items to fill your Box</mat-card-title>
+        <mat-card-content>
+        <mat-tab-group  animationDuration="500ms">
+            <mat-tab label="WelshCakes">
+              <mat-action-list role="list" class="add-contents">
+                <mat-list-item  class="l-item" role="listitem" *ngFor="let item of welshcakes | async">
+                  <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
+                  <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
+                      <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
+                </mat-list-item>
+              </mat-action-list>
+            </mat-tab>
+            <mat-tab label="Scones">
+              <mat-list role="list" class="add-contents">
+                  <mat-list-item class="l-item" role="listitem" *ngFor="let item of scones | async">
+                      <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
+                        <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
+                        <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
+                  </mat-list-item>
+                  <div *ngIf="(scones | async)?.length === 0">
+                    No offerings available right now.
+                  </div>
+              </mat-list>
+            </mat-tab>
+            <mat-tab label="Shortbread">
+              <mat-list role="list" class="add-contents">
+                <mat-list-item class="l-item" role="listitem" *ngFor="let item of shortbread | async">
+                    <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
+                    <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
+                          <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
+                </mat-list-item>
+                <div *ngIf="(shortbread | async)?.length === 0">
+                  No offerings available right now.
+                </div>
+              </mat-list>
+            </mat-tab>
+            <mat-tab label="ChocDip">
+              <mat-list role="list"class="add-contents">
+                  <mat-list-item  class="l-item" role="listitem" *ngFor="let item of chocdipped | async">
+                      <mat-icon (click)="addFlavorToBox(item)" matListIcon>add_circle_outline</mat-icon>
+                      <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
+                        <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
+                  </mat-list-item>
+                  <div *ngIf="(chocdipped | async)?.length === 0">
+                    No offerings available right now.
+                  </div>
+              </mat-list>
+            </mat-tab>
+            <mat-tab label="Extras">
+                <mat-list role="list" class="add-contents">
+                    <mat-list-item  class="l-item" role="listitem" *ngFor="let item of extras | async">
+                        <mat-icon (click)="addExtraToBox(item)" matListIcon>add_circle_outline</mat-icon>
+                        <div class="list-content" (click)="addExtraToBox(item)">{{item.title}}</div>
+                          <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
+                    </mat-list-item>
+                </mat-list>
+              </mat-tab>
+            </mat-tab-group>
+            </mat-card-content>
+          </mat-card>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-5">
+      <mat-card [ngClass]="{'boxfull': boxfull, 'boxnotfull': !boxfull}">
+        <mat-card-title>
+          <div class="cart-head">
+              <div class="card-head">Add your filled box to the shopping cart </div>
+              <button mat-button class="cart-btn" [disabled]="!canSubmit" (click)="addToCart()">Add to cart</button>
+          </div>            
+        </mat-card-title>
+        <mat-card-content>
+          <h3>Yummies <span class="amt">{{my.flavorval}}</span> of {{my.flavorAllowed}} - Extras <span class="amt">{{my.extraval}}</span> of {{my.extraAllowed}} allowed</h3>
+          <mat-list class="box-contents">
+              <mat-list-item class="l-item" role="listitem" *ngFor="let item of boxItems">
+                  {{item.title}} <ng-container *ngIf="item.quantity > 0" >({{item.quantity}})
+                      <div class="list-icons">
+                        <mat-icon *ngIf="item.category === 'extra'; else elseblock" matListIcon class="btn" (click)="decrementExtra(item.productId)">remove_circle_outline</mat-icon>
+                    <ng-template #elseblock>
+                        <mat-icon matListIcon class="i-btn" (click)="decrement(item.productId)">remove_circle_outline</mat-icon>
+                    </ng-template>
+                    <mat-icon matListIcon class="i-btn" (click)="removeRow(item.productId)">delete_circle</mat-icon>
+                    </div>
+                  </ng-container>
+              </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+      <div class="box-price" *ngIf="isboxset">
+          <p>This box price is:</p>
+          <p class="amt">{{product.price | currency}}</p>
+          <p>All boxes ship for free!</p>
+      </div>
+      <div class="disclaimer">Note: Scones can only be added to boxes of 11 or more packs and boxes that contain Extras.
+
+        <p>WF = Wheat Free (Oat Flour Recipe)</p>
+        <p>VG = Vegan (Natural Balance Margarine/Oat Milk) recipe</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="sendform">
+    <form #cartform enctype="multipart/form-data" method="post" id="sendCart" action="https://www.welshbaker.com/add_cart.asp" style="display: block" target="_self">
+        <input name="item_id" *ngIf="product" [value]="product.catalogId"/>
+        <input name="itemid" *ngIf="product" [value]="product.productId"/>
+        <input name="category_id" *ngIf="product" [value]="product.catalogId"/>
+        <input name="qty-0" value="1"/>
+        <input name="std_price" value="10.00"/>
+        <app-carttextarea [boxitems]="boxItems" *ngIf="product" [option]="product.YourOption" [currTotal]="my.currentTotal"></app-carttextarea>
+        <input name="specialamount" *ngIf="product"    [value]="product.price"/>
+        <!-- {{product.YourOption}} -->
+    </form>
+  </div>
+</div>
+
