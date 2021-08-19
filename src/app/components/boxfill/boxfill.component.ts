@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
-import { boxItem } from '../../interface/boxItem';
+import { boxItem, extraItem } from '../../interface/boxItem';
 import {MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 // import { matTabGroup} from "@angular/material/tabs";
@@ -280,11 +280,12 @@ export class BoxfillComponent implements OnInit {
       if(this.isboxset){
         //do add extra
         console.log("The amount of extras allowed: ", this.my.extraAllowed);
-        let bItem: boxItem = {title: "", quantity: 0, productId: '0', category: 'extra', soldout: false};
+        let bItem: extraItem = {title: "", quantity: 0, productId: '0', category: 'extra', soldout: false, maxlimit: 4};
         bItem.title = extra.title;
         bItem.quantity = 1;
         bItem.productId = extra.productId;
         bItem.soldout = extra.soldout;
+        bItem.maxlimit = extra.maxlimit;
         if(this.my.extraAllowed > 0) {
           this.my.extraval = +this.my.extraval + 1;
           if(this.my.extraval <= this.my.extraAllowed && this.my.extraAllowed > 0) {
@@ -296,7 +297,12 @@ export class BoxfillComponent implements OnInit {
             else if(this.boxItems.find((item) => {return item.productId === bItem.productId})) {
               let tmpItems = this.boxItems.map(element => {
                 if(element.productId === bItem.productId){
+                  if(element.quantity < bItem.maxlimit){
                   element.quantity = +element.quantity + 1;
+                  } else {
+          this.my.extraval = +this.my.extraval - 1;
+                     this.openGenericDialog(`Sorry, this item has a maximum limit of ${bItem.maxlimit}`)
+                  }
                 }
                 return element;
               });

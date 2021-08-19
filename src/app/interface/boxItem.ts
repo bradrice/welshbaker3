@@ -7,3 +7,7 @@ export interface boxItem {
     soldout: boolean;
 }
 
+export interface extraItem extends boxItem {
+  maxlimit: number;
+}
+
