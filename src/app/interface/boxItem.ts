@@ -4,5 +4,6 @@ export interface boxItem {
     quantity: number;
     category: string;
     ExcludedId?: string[];
+    soldout: boolean;
 }
 

@@ -4,4 +4,6 @@ export interface IDoc {
     title: string;
     active: boolean;
     key: string;
+    soldout: boolean;
+    maxlimit?: number;
   }

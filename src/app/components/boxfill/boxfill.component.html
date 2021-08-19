@@ -28,7 +28,7 @@
         <mat-tab-group  animationDuration="500ms">
             <mat-tab label="WelshCakes">
               <mat-action-list role="list" class="add-contents">
-                <mat-list-item  class="l-item" role="listitem" *ngFor="let item of welshcakes | async">
+                <mat-list-item [ngClass]="{'disabled' : item.soldout}"  class="l-item" role="listitem" *ngFor="let item of welshcakes | async">
                   <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
                   <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
                       <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>

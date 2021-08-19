@@ -93,6 +93,22 @@ export class EditdocComponent implements OnInit, AfterViewInit {
         required: 'One must be selected'
       }
     }
+  },
+  {
+    key: 'soldout',
+    type: 'radio',
+    templateOptions: {
+      label: 'Sold Out',
+      options: [{value: 'True', key: true}, {value: 'False', key: false}]
+    },
+    validators: {
+      validation: [Validators.required]
+    },
+    validation: {
+      messages: {
+        required: 'One must be selected'
+      }
+    }
   }
 ];
     this.sub = this.route.paramMap.subscribe((params:any) => { 

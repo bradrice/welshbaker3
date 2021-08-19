@@ -219,13 +219,19 @@ export class BoxfillComponent implements OnInit {
       this.my.flavorval = +this.my.flavorval + 1;
     const item = $event;
     // console.log(item.title);
-    let bItem: boxItem = {title: "", quantity: 0, productId: '0', category: ''};
+    let bItem: boxItem = {title: "", quantity: 0, productId: '0', category: '', soldout: false};
       bItem.title = item.title;
       bItem.quantity = 1;
       bItem.productId = item.productId;
+      bItem.soldout = item.soldout;
       item.ExcludedId ? bItem.ExcludedId = item.ExcludedId: bItem.ExcludedId = [];
       console.log("bItem", bItem, this.product.productId);
       console.log(bItem.ExcludedId?.indexOf(this.product.productId));
+      if(bItem.soldout === true){
+      this.openGenericDialog('Sorry, this item is currently sold out')
+      this.my.flavorval = +this.my.flavorval - 1;
+      return;
+      };
     if ( bItem.ExcludedId?.indexOf(this.product.productId) !== -1 ) {
       this.openGenericDialog('Sorry, Scones can only be added to boxes of 11 or more packs and boxes with extras.');
       const newflavorval = this.boxItems.reduce(reducer, initialValue);
@@ -274,10 +280,11 @@ export class BoxfillComponent implements OnInit {
       if(this.isboxset){
         //do add extra
         console.log("The amount of extras allowed: ", this.my.extraAllowed);
-        let bItem: boxItem = {title: "", quantity: 0, productId: '0', category: 'extra'};
+        let bItem: boxItem = {title: "", quantity: 0, productId: '0', category: 'extra', soldout: false};
         bItem.title = extra.title;
         bItem.quantity = 1;
         bItem.productId = extra.productId;
+        bItem.soldout = extra.soldout;
         if(this.my.extraAllowed > 0) {
           this.my.extraval = +this.my.extraval + 1;
           if(this.my.extraval <= this.my.extraAllowed && this.my.extraAllowed > 0) {
@@ -297,6 +304,14 @@ export class BoxfillComponent implements OnInit {
             }
             else { 
               // this.boxItems.push(bItem) 
+      if(bItem.soldout === true){
+      if(bItem.soldout === true){
+      this.openGenericDialog('Sorry, this item is currently sold out')
+      return;
+      };
+      this.openGenericDialog('Sorry, this item is currently sold out')
+      return;
+      };
               let boxitems = [...this.boxItems];
               let currIndex = this.boxItems.length;
               boxitems[currIndex] = bItem;

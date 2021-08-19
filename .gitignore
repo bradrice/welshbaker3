@@ -16,6 +16,11 @@
 # profiling files
 chrome-profiler-events*.json
 
+#debug
+firebase-debug.log
+firestore-debug.log
+
+
 # IDEs and editors
 /.idea
 .project
