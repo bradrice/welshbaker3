@@ -17,9 +17,10 @@
 chrome-profiler-events*.json
 
 #debug
-firebase-debug.log
 firestore-debug.log
-
+firestore-debug.*.log
+firebase-debug.log
+firebase-debug.*.log
 
 # IDEs and editors
 /.idea

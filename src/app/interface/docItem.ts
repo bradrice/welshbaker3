@@ -5,5 +5,4 @@ export interface IDoc {
     active: boolean;
     key: string;
     soldout: boolean;
-    maxlimit?: number;
   }
