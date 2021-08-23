@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { boxItem, extraItem } from '../../interface/boxItem';
+import { INote } from '../../interface/iNote';
 import {MatDialog } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 // import { matTabGroup} from "@angular/material/tabs";
@@ -32,6 +33,7 @@ export class BoxfillComponent implements OnInit {
   extras: Observable<any[]>;
   chocdipped: Observable<any[]>;
   boxes$: Observable<any>;
+  notes$: Observable<any>;
   box_sizes:Observable<any[]>;
   my = {'num': 0, 'num2': '', 'totalval': 0, 'totalAllowed': 0, 'currentTotal': 0, 'flavorLeft': 0, 'extraAllowed': 0, 'flavorAllowed': 0, 'extraval': 0, 'flavorval': 0, 'extraLeft': 0};
   boxfull = false;
@@ -145,6 +147,13 @@ export class BoxfillComponent implements OnInit {
       });
       this.extras = of(this.extraitems);
     })
+    
+    this.productService.notes$.subscribe(items => {
+      let notes = items.map((item:any) => {
+        return item;
+      })
+      
+    });
 
     // console.log(this.productService);
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { IDoc } from '../../interface/docItem';
+import { INote } from '../../interface/iNote';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
 
@@ -28,6 +29,9 @@ export class ProductService {
   chocdippedSnap$: Observable<any>;
   welshcakeArray: Observable<any[]>;
   productsRef: AngularFirestoreCollection<IDoc>|undefined;
+  notes$: Observable<any>;
+  notesRef: AngularFirestoreCollection<INote>|undefined;
+  
 
   constructor( private db: AngularFirestore ) {
     this.welshcakeref = db.collection<IDoc>('welshcakes', ref => ref.orderBy('productId', 'asc'));
@@ -46,6 +50,8 @@ export class ProductService {
     this.shortbreadref = db.collection<IDoc>('shortbread', ref => ref.orderBy('productId', 'asc'));
     this.shortbread$ = this.shortbreadref.valueChanges();
     this.shortbreadSnap$ = this.shortbreadref.snapshotChanges();
+    this.notesRef = db.collection<INote>('notes', ref => ref.orderBy('order', 'asc'));
+    this.notes$ = this.notesRef.valueChanges();
    }
 
 
@@ -73,6 +79,9 @@ export class ProductService {
         case 'shortbread':
           document = this.db.doc('shortbread/' + id);
          break;
+       case 'notes':
+          document = this.db.doc('notes/' + id);
+        break;
          default:
            document = this.db.doc('welshcakes/'+ id);
      }
@@ -103,6 +112,9 @@ export class ProductService {
         case 'shortbread':
           document = this.db.doc('shortbread/' + id);
          break;
+        case 'notes':
+          document = this.db.doc('notes/' + id);
+         break;
      }
      let obj = document?.set(data);
      return obj;
@@ -131,6 +143,9 @@ export class ProductService {
 
         case 'shortbread':
           collection = this.shortbreadref;
+         break;
+        case 'notes':
+          collection = this.notesRef;
          break;
      }
      let obj = collection?.add(data)
@@ -167,6 +182,9 @@ export class ProductService {
 
         case 'shortbread':
           collection = this.shortbreadref;
+         break;
+        case 'notes':
+          collection = this.notesRef;
          break;
     }
     return collection?.doc(id)?.delete();
