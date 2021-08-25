@@ -6,6 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { BoxfillComponent } from './components/boxfill/boxfill.component';
 import { AuthGuardService } from './share/services/authguard.service';
 import { EditdocComponent } from './components/editdoc/editdoc.component';
+import { EditNoteComponent } from './components/editnote/editnote.component';
+import { EditExtraComponent } from './components/editextra/editextra.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,26 @@ const routes: Routes = [
   {
     path: 'edit/:type',
       component: EditdocComponent,
+      canActivate : [AuthGuardService]
+  },
+  {
+    path: 'editnote/:id',
+      component: EditNoteComponent,
+      canActivate : [AuthGuardService]
+  },
+  {
+    path: 'editnote',
+      component: EditNoteComponent,
+      canActivate : [AuthGuardService]
+  },
+  {
+    path: 'editextra/:id',
+      component: EditExtraComponent,
+      canActivate : [AuthGuardService]
+  },
+  {
+    path: 'editextra',
+      component: EditExtraComponent,
       canActivate : [AuthGuardService]
   },
   {

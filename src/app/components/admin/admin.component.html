@@ -161,19 +161,19 @@
           <tbody>
             <tr *ngFor="let item of extras">
           <td class="tile tile-left">
-            {{item.title}}
+            {{item.title}} 
           </td>
           <td class="tile tile-left">
             {{item.productId}}
           </td>
           <td>{{item.active}}</td>
           <td class="tile">
-            <button mat-button class="btn btn-primary" (click)="updateItem(item.key, 'extras')">Edit</button>
+            <button mat-button class="btn btn-primary" (click)="updateExtra(item.key)">Edit</button>
           </td>
           </tr>
           <tr>
             <td colspan="2">
-              <button mat-button (click)="addItem('extras')">Add Item</button>
+              <button mat-button (click)="addExtra()">Add Item</button>
             </td>
           </tr>
         </tbody>
@@ -182,13 +182,39 @@
         </div>
          
       </div>
-      <!-- <mat-list role="list" class="add-contents">
-          <mat-list-item  class="l-item" role="listitem" *ngFor="let item of extras | async">
-              <mat-icon (click)="addExtraToBox(item)" matListIcon>add_circle_outline</mat-icon>
-              <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
-                <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
-          </mat-list-item>
-      </mat-list> -->
+    </mat-tab>
+  <mat-tab label="Notes">
+    <div  class="row" role="listitem" >
+      <div class="col-sm-12">
+        <table class="table" style="width: 100%">
+          <thead>
+            <th>Title</th>                
+            <th>Order</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of notes">
+          <td class="tile tile-left">
+            {{item.note}}
+          </td>
+          <td class="tile tile-left">
+            {{item.order}}
+          </td>
+          <td class="tile">
+            <button mat-button class="btn btn-primary" (click)="updateNote(item.key)">Edit</button>
+          </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button mat-button (click)="addNote()">Add Item</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+        <mat-divider></mat-divider>
+        </div>
+         
+      </div>
     </mat-tab>
   </mat-tab-group>
   </div>

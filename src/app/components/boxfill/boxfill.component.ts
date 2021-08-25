@@ -34,6 +34,7 @@ export class BoxfillComponent implements OnInit {
   chocdipped: Observable<any[]>;
   boxes$: Observable<any>;
   notes$: Observable<any>;
+  notes: INote[];
   box_sizes:Observable<any[]>;
   my = {'num': 0, 'num2': '', 'totalval': 0, 'totalAllowed': 0, 'currentTotal': 0, 'flavorLeft': 0, 'extraAllowed': 0, 'flavorAllowed': 0, 'extraval': 0, 'flavorval': 0, 'extraLeft': 0};
   boxfull = false;
@@ -149,10 +150,10 @@ export class BoxfillComponent implements OnInit {
     })
     
     this.productService.notes$.subscribe(items => {
-      let notes = items.map((item:any) => {
-        return item;
-      })
-      
+      this.notes = items.sort((a:INote,b:INote)  => {
+        return a.order-b.order;
+      });
+      console.log(this.notes);     
     });
 
     // console.log(this.productService);

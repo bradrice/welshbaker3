@@ -75,7 +75,7 @@
                 <mat-list role="list" class="add-contents">
                     <mat-list-item  class="l-item" role="listitem" *ngFor="let item of extras | async">
                         <mat-icon (click)="addExtraToBox(item)" matListIcon>add_circle_outline</mat-icon>
-                        <div class="list-content" (click)="addExtraToBox(item)">{{item.title}}</div>
+                        <div class="list-content" (click)="addExtraToBox(item)">{{item.title}} {{item.maxlimit<4?"(Max:"+ item.maxlimit+")":""}}</div>
                           <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
                     </mat-list-item>
                 </mat-list>
@@ -89,7 +89,7 @@
         <mat-card-title>
           <div class="cart-head">
               <div class="card-head">Add your filled box to the shopping cart </div>
-              <button mat-button class="cart-btn" [disabled]="!canSubmit" (click)="addToCart()">Add to cart</button>
+              <button mat-button class="cart-btn mat-button mat-button-base" [disabled]="!canSubmit" (click)="addToCart()">Add to cart</button>
           </div>            
         </mat-card-title>
         <mat-card-content>
@@ -114,10 +114,8 @@
           <p class="amt">{{product.price | currency}}</p>
           <p>All boxes ship for free!</p>
       </div>
-      <div class="disclaimer">Note: Scones can only be added to boxes of 11 or more packs and boxes that contain Extras.
-
-        <p>WF = Wheat Free (Oat Flour Recipe)</p>
-        <p>VG = Vegan (Natural Balance Margarine/Oat Milk) recipe</p>
+      <div class="disclaimer">Notes:
+        <p *ngFor="let note of notes">{{note.note}}</p>
       </div>
     </div>
   </div>

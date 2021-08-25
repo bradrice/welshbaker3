@@ -30,7 +30,7 @@ export class ProductService {
   welshcakeArray: Observable<any[]>;
   productsRef: AngularFirestoreCollection<IDoc>|undefined;
   notes$: Observable<any>;
-  notesRef: AngularFirestoreCollection<INote>|undefined;
+  notesRef: AngularFirestoreCollection<INote>;
   
 
   constructor( private db: AngularFirestore ) {
@@ -79,12 +79,15 @@ export class ProductService {
         case 'shortbread':
           document = this.db.doc('shortbread/' + id);
          break;
-       case 'notes':
-          document = this.db.doc('notes/' + id);
-        break;
-         default:
+        default:
            document = this.db.doc('welshcakes/'+ id);
      }
+     return document.valueChanges();
+   }
+
+   getNote(id:string) {
+     let document:AngularFirestoreDocument;
+     document = this.db.doc('notes/'+ id);
      return document.valueChanges();
    }
    
@@ -112,10 +115,13 @@ export class ProductService {
         case 'shortbread':
           document = this.db.doc('shortbread/' + id);
          break;
-        case 'notes':
-          document = this.db.doc('notes/' + id);
-         break;
      }
+     let obj = document?.set(data);
+     return obj;
+   }
+
+   setNote(id: string, data: INote) {
+     let document = this.db.doc('notes/' + id);
      let obj = document?.set(data);
      return obj;
    }
@@ -144,11 +150,22 @@ export class ProductService {
         case 'shortbread':
           collection = this.shortbreadref;
          break;
-        case 'notes':
-          collection = this.notesRef;
-         break;
      }
      let obj = collection?.add(data)
+     .then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+      //obj = docRef.id;
+  })
+      .catch(function(error) {
+      console.error("Error adding document: ", error);
+  });
+     return obj;
+  }
+
+  
+  createNote(data: INote) {
+    let collection = this.notesRef;
+    let obj = collection?.add(data)
      .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);
       //obj = docRef.id;
@@ -183,10 +200,12 @@ export class ProductService {
         case 'shortbread':
           collection = this.shortbreadref;
          break;
-        case 'notes':
-          collection = this.notesRef;
-         break;
     }
+    return collection?.doc(id)?.delete();
+  }
+
+  deleteNote(id:string) {
+    let collection = this.notesRef;
     return collection?.doc(id)?.delete();
   }
 

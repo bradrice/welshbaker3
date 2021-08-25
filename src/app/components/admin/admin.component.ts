@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgAuthService } from '../../share/services/auth.service';
 import { map } from 'rxjs/operators';
 import { IDoc } from 'src/app/interface/docItem';
+import { IExtra } from 'src/app/interface/docItem';
+import { INote } from 'src/app/interface/iNote';
 
 @Component({
   selector: 'app-admin',
@@ -27,10 +29,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   shortbreadSub;
   scones: IDoc[];
   sconesSub;
-  extras: IDoc[];
+  extras: IExtra[];
   extrasSub;
   chocdipped: IDoc[];
   chocdippedSub;
+  notes: INote[];
   boxes$: Observable<any>;
   boxesSub;
   box_sizes:Observable<any[]>;
@@ -86,6 +89,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.getShortbreadList();
     this.getChocDipList();
     this.getExtrasList();
+    this.getNotesList();
 
     this.flavorValSub = this.productService.flavorVal$.subscribe(val => {
       console.log("flavor val will be: ", val);
@@ -156,15 +160,47 @@ export class AdminComponent implements OnInit, OnDestroy {
       this.extras = items;
     });
   }
+  
+  getNotesList() {
+    this.productService.notesRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map((c:any) =>
+          ({ key: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(items => {
+      console.log("notes", items);
+      this.notes = items;
+    });
+  
+  }
 
   updateItem(id, type){
     console.log(id, type);
     this._router.navigate(["edit", type, id]);
   }
+  
+  updateNote(id){
+    console.log(id);
+    this._router.navigate(["editnote", id]);
+  }
+  
+  updateExtra(id){
+    console.log("update extra", id);
+    this._router.navigate(["editextra", id]);
+  }
 
   addItem(type){
     console.log(type);
     this._router.navigate(["edit", type]);
+  }
+
+  addNote(){
+    this._router.navigate(["editnote"]);
+  }
+  
+  addExtra(){
+    this._router.navigate(["editextra"]);
   }
 
   logout(){

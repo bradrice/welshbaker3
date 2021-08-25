@@ -10,6 +10,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { BoxfillComponent } from './components/boxfill/boxfill.component';
 import { LoginComponent } from './components/login/login.component';
 import { EditdocComponent } from './components/editdoc/editdoc.component';
+import { EditNoteComponent } from './components/editnote/editnote.component';
+import { EditExtraComponent } from './components/editextra/editextra.component';
 import { ShareModule } from '../app/share/share.module'
 import { ProductService } from './share/services/product.service';
 import { AppComponent } from './app.component';
@@ -29,7 +31,9 @@ import { AngularFireAuthModule, USE_EMULATOR as AUTH_EMULATOR } from '@angular/f
     AdminComponent,
     BoxfillComponent,
     LoginComponent,
-    EditdocComponent
+    EditdocComponent,
+    EditNoteComponent,
+    EditExtraComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,14 @@ import { AngularFireAuthModule, USE_EMULATOR as AUTH_EMULATOR } from '@angular/f
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormlyModule.forRoot({ extras: { lazyRender: true } }),
+    FormlyModule.forRoot({
+      validationMessages: [
+        {
+          name: 'required',
+          message: 'This field is required'
+        }
+      ],
+      extras: { lazyRender: true } }),
     FormlyMaterialModule
   ],
   providers: [   

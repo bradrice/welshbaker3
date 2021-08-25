@@ -6,3 +6,7 @@ export interface IDoc {
     key: string;
     soldout: boolean;
   }
+
+  export interface IExtra extends IDoc {
+    maxlimit: number;
+  }

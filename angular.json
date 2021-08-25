@@ -23,6 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["@firebase/app-check"],
             "outputPath": "dist/welshbaker3",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,13 +46,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "3000kb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "170kb",
+                  "maximumError": "250kb"
                 }
               ],
               "fileReplacements": [
