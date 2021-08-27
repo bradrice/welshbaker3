@@ -75,7 +75,9 @@
                 <mat-list role="list" class="add-contents">
                     <mat-list-item  class="l-item" role="listitem" *ngFor="let item of extras | async">
                         <mat-icon (click)="addExtraToBox(item)" matListIcon>add_circle_outline</mat-icon>
-                        <div class="list-content" (click)="addExtraToBox(item)">{{item.title}} {{item.maxlimit<4?"(Max:"+ item.maxlimit+")":""}}</div>
+                        <div *ngIf="item.maxlimit===9; else elseBlock" class="list-content" (click)="addExtraToBox(item)">{{item.title}}</div>
+                        <ng-template #elseBlock><div class="list-content" (click)="addExtraToBox(item)">{{item.title}} <span class="maxlimit">(max allowed: {{item.maxlimit}})</span></div></ng-template>
+                        <!-- <div class="list-content" (click)="addExtraToBox(item)">{{item.title}} {{item.maxlimit<4?"(Max:"+ item.maxlimit+")":""}}</div> -->
                           <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
                     </mat-list-item>
                 </mat-list>

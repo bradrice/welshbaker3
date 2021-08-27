@@ -7,7 +7,7 @@ from firebase_admin import firestore
 # Use a service account
 cred = credentials.Certificate('/home/bradrice/.cert/firebase/welshbaker2-0b2a26e8ddc6.json')
 firebase_admin.initialize_app(cred)
-os.environ["FIRESTORE_EMULATOR_HOST"] = "127.0.0.1:8080"
+#os.environ["FIRESTORE_EMULATOR_HOST"] = "127.0.0.1:8080"
 data = {u'soldout': True}
 db = firestore.client()
 # col = db.collection(u'boxsize').document(u'11-pack').update(data)
@@ -18,7 +18,7 @@ def addField(ref):
     docs = ref.stream()
     for item in docs:
         doc = ref.document(item.id)
-        doc.set({u'maxlimit': 3}, merge=True)
+        doc.set({u'maxlimit': 9}, merge=True)
         print(item.id)
 
 def addDoc():

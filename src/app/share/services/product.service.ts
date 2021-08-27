@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { IDoc } from '../../interface/docItem';
+import { IDoc, IExtra } from '../../interface/docItem';
 import { INote } from '../../interface/iNote';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 
@@ -91,7 +91,7 @@ export class ProductService {
      return document.valueChanges();
    }
    
-  setItem(type:string, id:string, data:any) {
+  setItem(type:string, id:string, data:IDoc|IExtra) {
      console.log('In product service, retrieving object', type, id);
      let document;
      switch(type) 

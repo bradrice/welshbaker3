@@ -6,7 +6,9 @@
 </form>
 <mat-divider></mat-divider>
 <p class="warn" *ngIf="message">{{message}}</p> 
-<button color="warn" *ngIf="id" mat-button (click)="deleteItem(id)">Delete Item</button>
-<button color="primary" mat-button (click)="goToAdmin()">Return to list</button>
+<div class="standard-buttons">
+<button color="warn" *ngIf="id" mat-button (click)="deleteItem(id)" class="btn btn-danger">Delete Item</button>
+<button color="primary" mat-button (click)="goToAdmin()" class="btn btn-secondary">Return to list</button>
+</div>
 
 <!-- <p>{{document | json}}</p> -->

@@ -112,20 +112,17 @@ export class EditExtraComponent implements OnInit, AfterViewInit {
   },
   {
     key: 'maxlimit',
-    type: 'input',
+    type: 'radio',
     templateOptions: {
       label: 'Maximum allowed',
-      type: 'number',
-      placeholder: 'Maximum allowed',
-      min: 0,
-      max: 10
+      options: [{value: '1', id: 'opt1', key: 1}, {value: '2', id: 'opt2', key: 2}, {value: '3', id: "opt3", key: 3}, {value: 'no limit', id: "opt4", key: 9}]
     },
     validators: {
       validation: [Validators.required]
     },
     validation: {
       messages: {
-        required: 'A maximum must be set, anything above 4 is no-limit'
+        required: 'One must be selected'
       }
     }
   }
@@ -147,7 +144,7 @@ export class EditExtraComponent implements OnInit, AfterViewInit {
        
       });
      } else {
-       this.document = {title: '', productId: '', image: '', active: false};
+       this.document = {title: '', productId: '', image: '', active: false, soldout: false, maxlimit: 9999};
      }
    });
     }
@@ -156,8 +153,10 @@ export class EditExtraComponent implements OnInit, AfterViewInit {
 }
 
 submit() {
+  this.type = 'extras';
   console.log("submitted");
-  // console.log(this.type, this.id, this.document);
+  console.log(this.type, this.id, this.document);
+
   if(this.id){
   this.productService.setItem(this.type, this.id, this.document);
   setTimeout(() => {
