@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href=/welshbaker/",
+    "deploy": "ng build --base-href=/welshbaker3/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

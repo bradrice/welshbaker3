@@ -311,7 +311,7 @@ export class BoxfillComponent implements OnInit {
                   element.quantity = +element.quantity + 1;
                   } else {
           this.my.extraval = +this.my.extraval - 1;
-                     this.openGenericDialog(`Sorry, this item has a maximum limit of ${bItem.maxlimit}`)
+                     this.openGenericDialog(` Sorry, only ${bItem.maxlimit} of this extra can fit in this box`)
                   }
                 }
                 return element;
