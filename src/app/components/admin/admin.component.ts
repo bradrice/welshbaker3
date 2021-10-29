@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { boxItem } from '../../interface/boxItem';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ProductService } from '../../share/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgAuthService } from '../../share/services/auth.service';
@@ -18,7 +19,7 @@ import { INote } from 'src/app/interface/iNote';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit, OnDestroy {
+export class AdminComponent implements OnInit, OnDestroy, AfterViewInit {
 
   boxesRef: AngularFirestoreCollection<boxItem[]>;
   items: AngularFirestoreCollection<any[]>;
@@ -53,6 +54,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   currItem: string;
   anonuser: Observable<null>;
   loginForm: FormGroup;
+  @ViewChild('tabGroup') tabGroup: ElementRef;
+  selectedIndex: number;
   // user: Observable<firebase.auth.User>;
 
   constructor(
@@ -73,6 +76,8 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.login();
+    this.selectedIndex = this.productService.getAdminTab();
+    console.log("tab index:", this.selectedIndex)
     this.route.queryParams
       .subscribe(params => {
         // console.log(params); // {order: "popular"}
@@ -95,6 +100,17 @@ export class AdminComponent implements OnInit, OnDestroy {
       console.log("flavor val will be: ", val);
     })
   }
+
+  ngAfterViewInit() {
+    console.log(this.tabGroup);
+    // console.log(this.tabGroup.selectedIndex);
+    }
+
+
+    public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+      console.log(tabChangeEvent);
+      this.productService.changeAdminTabData(tabChangeEvent.index)
+    }
 
   getWelshcakesist() {
     this.productService.welshcakeref.snapshotChanges().pipe(

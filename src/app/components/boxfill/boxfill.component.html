@@ -28,7 +28,7 @@
         <mat-tab-group  animationDuration="500ms">
             <mat-tab label="WelshCakes">
               <mat-action-list role="list" class="add-contents">
-                <mat-list-item [ngClass]="{'disabled' : item.soldout}"  class="l-item" role="listitem" *ngFor="let item of welshcakes | async">
+                <mat-list-item [ngClass]="{'disabledItem' : item.soldout}"  class="l-item" role="listitem" *ngFor="let item of welshcakes | async">
                   <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
                   <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
                       <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
@@ -37,7 +37,7 @@
             </mat-tab>
             <mat-tab label="Scones">
               <mat-list role="list" class="add-contents">
-                  <mat-list-item class="l-item" role="listitem" *ngFor="let item of scones | async">
+                  <mat-list-item [ngClass]="{'disabledItem' : item.soldout}" class="l-item" role="listitem" *ngFor="let item of scones | async">
                       <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
                         <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
                         <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
@@ -49,7 +49,7 @@
             </mat-tab>
             <mat-tab label="Shortbread">
               <mat-list role="list" class="add-contents">
-                <mat-list-item class="l-item" role="listitem" *ngFor="let item of shortbread | async">
+                <mat-list-item [ngClass]="{'disabledItem' : item.soldout}" class="l-item" role="listitem" *ngFor="let item of shortbread | async">
                     <mat-icon matListIcon (click)="addFlavorToBox(item)">add_circle_outline</mat-icon>
                     <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
                           <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
@@ -61,7 +61,7 @@
             </mat-tab>
             <mat-tab label="ChocDip">
               <mat-list role="list"class="add-contents">
-                  <mat-list-item  class="l-item" role="listitem" *ngFor="let item of chocdipped | async">
+                  <mat-list-item  [ngClass]="{'disabledItem' : item.soldout}" class="l-item" role="listitem" *ngFor="let item of chocdipped | async">
                       <mat-icon (click)="addFlavorToBox(item)" matListIcon>add_circle_outline</mat-icon>
                       <div class="list-content" (click)="addFlavorToBox(item)">{{item.title}}</div>
                         <mat-icon *ngIf="item.image" class="image-icon" matListIcon (click)="showImage(item.image);">gradient</mat-icon>
@@ -73,7 +73,7 @@
             </mat-tab>
             <mat-tab label="Extras">
                 <mat-list role="list" class="add-contents">
-                    <mat-list-item  class="l-item" role="listitem" *ngFor="let item of extras | async">
+                    <mat-list-item  [ngClass]="{'disabledItem' : item.soldout}" class="l-item" role="listitem" *ngFor="let item of extras | async">
                         <mat-icon (click)="addExtraToBox(item)" matListIcon>add_circle_outline</mat-icon>
                         <div *ngIf="item.maxlimit===9; else elseBlock" class="list-content" (click)="addExtraToBox(item)">{{item.title}}</div>
                         <ng-template #elseBlock><div class="list-content" (click)="addExtraToBox(item)">{{item.title}} <span class="maxlimit">(max allowed: {{item.maxlimit}})</span></div></ng-template>
@@ -117,7 +117,7 @@
           <p>All boxes ship for free!</p>
       </div>
       <div class="disclaimer">Notes:
-        <p *ngFor="let note of notes">{{note.note}}</p>
+        <p class="notes" *ngFor="let note of notes">{{note.note}}</p>
       </div>
     </div>
   </div>

@@ -31,6 +31,8 @@ export class ProductService {
   productsRef: AngularFirestoreCollection<IDoc>|undefined;
   notes$: Observable<any>;
   notesRef: AngularFirestoreCollection<INote>;
+  adminTab = new BehaviorSubject<number>(0);
+
   
 
   constructor( private db: AngularFirestore ) {
@@ -212,6 +214,19 @@ export class ProductService {
   changeFlavorData(data: number) {
     console.log('In changeFlavorData: ', data);
     this.flavorVal.next(data);
+  }
+
+  changeAdminTabData(data: number) {
+    console.log('In changeAdminTab: ', data);
+    this.adminTab.next(data);
+  }
+
+  getAdminTab():number {
+    let tabVal: number = 0;
+    this.adminTab.subscribe(data => {
+      tabVal = data;
+    });
+    return tabVal;
   }
 
   getWelshcakes(): Observable<any[]> {

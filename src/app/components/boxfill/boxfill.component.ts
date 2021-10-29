@@ -296,6 +296,10 @@ export class BoxfillComponent implements OnInit {
         bItem.productId = extra.productId;
         bItem.soldout = extra.soldout;
         bItem.maxlimit = extra.maxlimit;
+        if(bItem.soldout === true){
+          this.openGenericDialog('Sorry, this item is currently sold out')
+          return;
+          };
         if(this.my.extraAllowed > 0) {
           this.my.extraval = +this.my.extraval + 1;
           if(this.my.extraval <= this.my.extraAllowed && this.my.extraAllowed > 0) {
@@ -320,14 +324,6 @@ export class BoxfillComponent implements OnInit {
             }
             else { 
               // this.boxItems.push(bItem) 
-      if(bItem.soldout === true){
-      if(bItem.soldout === true){
-      this.openGenericDialog('Sorry, this item is currently sold out')
-      return;
-      };
-      this.openGenericDialog('Sorry, this item is currently sold out')
-      return;
-      };
               let boxitems = [...this.boxItems];
               let currIndex = this.boxItems.length;
               boxitems[currIndex] = bItem;
