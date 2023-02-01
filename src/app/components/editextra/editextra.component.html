@@ -1,14 +1,14 @@
 <h1>Add/Update document</h1>
-
+<div class="standard-buttons">
+<button color="warn" *ngIf="id" mat-button (click)="deleteItem(id)" class="btn btn-danger">Delete Item</button>
+<button color="primary" mat-button (click)="goToAdmin()" class="btn btn-secondary">Return to list</button>
+</div>
 <form *ngIf="document" [formGroup]="form" (ngSubmit)="submit()">
     <formly-form [form]="form" [fields]="fields" [model]="document"></formly-form>
     <button color="primary" type="submit" mat-button class="btn btn-primary">Submit</button>
 </form>
 <mat-divider></mat-divider>
 <p class="warn" *ngIf="message">{{message}}</p> 
-<div class="standard-buttons">
-<button color="warn" *ngIf="id" mat-button (click)="deleteItem(id)" class="btn btn-danger">Delete Item</button>
-<button color="primary" mat-button (click)="goToAdmin()" class="btn btn-secondary">Return to list</button>
-</div>
+
 
 <!-- <p>{{document | json}}</p> -->

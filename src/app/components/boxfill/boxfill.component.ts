@@ -186,16 +186,18 @@ export class BoxfillComponent implements OnInit {
     console.log(this.my.flavorval > this.my.flavorAllowed);
 
     console.log("checking logic for flavors", this.my.flavorval, this.my.flavorAllowed);
+    this.removeFlavors();
+    this.removeExtras();
 
-    if(this.my.flavorval > this.my.flavorAllowed){
-      console.log('too many flavors');
-      this.removeFlavors();
-    }
+    // if(this.my.flavorval > this.my.flavorAllowed){
+    //   console.log('too many flavors');
+    //   this.removeFlavors();
+    // }
 
-    if(this.my.extraAllowed === 0 || this.my.extraval > this.my.extraAllowed){
-      console.log('too many extras');
-      this.removeExtras();
-    }
+    // if(this.my.extraAllowed === 0 || this.my.extraval > this.my.extraAllowed){
+    //   console.log('too many extras');
+    //   this.removeExtras();
+    // }
     
     console.log(this.my);
 

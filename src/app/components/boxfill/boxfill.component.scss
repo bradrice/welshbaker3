@@ -125,10 +125,14 @@ h6 {
   white-space: nowrap;
 }
 
+:host ::ng-deep .mat-list-base .mat-list-item.mat-list-item-with-avatar {
+  height: auto;
+}
+
 @media (min-width: 600px) {
   :host ::ng-deep {
     .mat-list-base .mat-list-item.mat-list-item-with-avatar {
-      height: 40px;
+      height: auto;
     }
     .card-head {
       font-size: 18px;
@@ -142,6 +146,7 @@ h6 {
       margin: 6px 0;
       padding: 0;
       line-height: 18px;
+      height: auto;
     }
     .mat-button {
       min-width: 100px;
